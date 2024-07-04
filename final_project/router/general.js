@@ -75,13 +75,12 @@ public_users.get('/author/:author',function (req, res) {
       resolve(res.send(JSON.stringify({books}, null, 4)));
         });
   
-        get_books.then(() => console.log("Task 12"));
+        get_books
+        .then(() => console.log("Task 12"))
+        .catch((err) => {console.error(err);});
   
   });
-      res.send(JSON.stringify({booksbyauthor}, null, 4));
-  
-  
-  });
+});
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
@@ -97,11 +96,11 @@ public_users.get('/title/:title',function (req, res) {
     }
   });
   resolve(res.send(JSON.stringify({books}, null, 4)));
-      });
+});
 
-      get_books.then(() => console.log("Task 13"));
-
-  res.send(JSON.stringify({booksbytitle}, null, 4));
+      get_books
+      .then(() => console.log("Task 13"))
+      .catch((err) => {console.error(err);});
 });
 
 
