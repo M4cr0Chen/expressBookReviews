@@ -31,15 +31,13 @@ public_users.post("/register", (req,res) => {
 // Get the book list available in the shop
 public_users.get('/books',function (req, res) {
 
+    const get_books = new Promise((resolve, reject) => {
+        resolve(res.send(JSON.stringify({books}, null, 4)));
+    });
 
-const get_books = new Promise((resolve, reject) => {
-    resolve(res.send(JSON.stringify({books}, null, 4)));
-});
-
-
-  get_books.then(() => console.log("Promise for Task 10 resolved"));
-
-
+    get_books
+    .then(() => console.log("Task 10"))
+    .catch((err) => {console.error(err);});
 });
 
 
@@ -52,36 +50,42 @@ public_users.get('/isbn/:isbn',function (req, res) {
     if(book) {
       resolve(res.send(book));
     }
-
-
     reject(res.status(404).json({messgae:"ISBN not found"}));
 
-
     get_book_isbn.then(function() {
-      console.log("Promise for Task 11 resolved");
+      console.log("Task 11 resolved");
     }).catch(function() {
-      console.log("Promise for Task 11 rejected");
+      console.log("Task 11 rejected");
     });
  });
-  return res.status(300).json({message: "Yet to be implemented"});
  });
  
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
+    //Write your code here
+    const get_books = new Promise((resolve, reject) => {
     let booksbyauthor = [];
-    let isbns = Object.keys(books);
-    isbns.forEach((isbn) => {
-      if(books[isbn]["author"] === req.params.author) {
-        booksbyauthor.push({"isbn":isbn,
-                            "title":books[isbn]["title"],
-                            "reviews":books[isbn]["reviews"]});
+      let isbns = Object.keys(books);
+      isbns.forEach((isbn) => {
+        if(books[isbn]["author"] === req.params.author) {
+          booksbyauthor.push({"isbn":isbn,
+                              "title":books[isbn]["title"],
+                              "reviews":books[isbn]["reviews"]});
       }
-    });
-    res.send(JSON.stringify({booksbyauthor}, null, 4));
+      resolve(res.send(JSON.stringify({books}, null, 4)));
+        });
+  
+        get_books.then(() => console.log("Task 12"));
+  
+  });
+      res.send(JSON.stringify({booksbyauthor}, null, 4));
+  
+  
   });
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
+    const get_books = new Promise((resolve, reject) => {
   //Write your code here
   let booksbytitle = [];
   let isbns = Object.keys(books);
@@ -92,6 +96,11 @@ public_users.get('/title/:title',function (req, res) {
                           "reviews":books[isbn]["reviews"]});
     }
   });
+  resolve(res.send(JSON.stringify({books}, null, 4)));
+      });
+
+      get_books.then(() => console.log("Task 13"));
+
   res.send(JSON.stringify({booksbytitle}, null, 4));
 });
 
